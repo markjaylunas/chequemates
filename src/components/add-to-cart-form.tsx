@@ -24,6 +24,7 @@ export default function AddToCartForm({ productId, stock }: Props) {
         <Button
           variant="secondary"
           className="w-8 h-8 -mb-3"
+          disabled={count <= 1}
           onClick={() => {
             if (count <= 1) return;
             setCount((v) => v - 1);
@@ -35,6 +36,7 @@ export default function AddToCartForm({ productId, stock }: Props) {
         <Button
           variant="secondary"
           className="w-8 h-8"
+          disabled={count === stock}
           onClick={() => {
             setCount((v) => {
               if (v === stock) {
