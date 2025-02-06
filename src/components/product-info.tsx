@@ -27,7 +27,7 @@ export default function ProductInfo({ product }: { product: ProductData }) {
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-muted-foreground mb-4">{description}</p>
-        <div className="space-y-2">
+        <div className="space-y-2 flex flex-row sm:flex-col justify-between ">
           <div className="flex items-center space-x-2">
             <span
               className="text-black text-2xl font-bold"

@@ -19,8 +19,8 @@ export default function AddToCartForm({ productId, stock }: Props) {
   };
 
   return (
-    <div className="flex gap-2">
-      <div className="mt-4 flex justify-between bg-secondary w-56 items-center gap-2 rounded-lg">
+    <div className="flex flex-col sm:flex-row gap-2">
+      <div className="mt-4 h-12 min-w-32 flex-1 flex justify-between bg-secondary w-full items-center gap-2 rounded-lg">
         <Button
           variant="secondary"
           className="w-8 h-8 -mb-3"
@@ -53,7 +53,7 @@ export default function AddToCartForm({ productId, stock }: Props) {
       <Button
         size="lg"
         variant="default"
-        className="w-full mt-4 text-black font-bold"
+        className="w-full mt-4 text-black font-bold shadow-primary drop-shadow-sm h-12"
         onClick={handleAddToCart}
       >
         <ShoppingCart />

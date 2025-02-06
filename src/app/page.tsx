@@ -39,11 +39,13 @@ export default function Home() {
       },
     ],
   };
+
   return (
     <main className="min-h-screen container  mx-auto">
-      <section className="flex justify-center mt-20 gap-24 w-full">
+      <section className="flex justify-center flex-col items-center sm:flex-row sm:mt-20 md:gap-12 lg:gap-24 w-full">
         <ImageShowcase name={product.name} images={product.images} />
-        <div className="mt-10">
+
+        <div className="sm:mt-10">
           <ProductInfo product={product} />
         </div>
       </section>
