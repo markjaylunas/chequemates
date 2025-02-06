@@ -11,3 +11,10 @@ export type ProductData = {
 
   images: { id: string; image: string; thumbnail: string }[];
 };
+
+export type CartItemType = {
+  product: ProductData;
+  quantity: number;
+};
+
+export type CartType = CartItemType[];
