@@ -3,12 +3,14 @@
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useCartStore } from "@/store/user-cart-store"; // Zustand cart store
 import { ShoppingCart } from "lucide-react";
+import Link from "next/link";
 import { CartItem } from "./cart-item";
 import { Button } from "./ui/button";
 
@@ -50,13 +52,17 @@ export default function Cart() {
               </div>
             ))}
 
-            <Button
-              size="lg"
-              variant="default"
-              className="w-full mt-4 text-black font-bold shadow-primary drop-shadow-sm h-12"
-            >
-              Checkout
-            </Button>
+            <DropdownMenuItem asChild>
+              <Link href="/checkout">
+                <Button
+                  size="lg"
+                  variant="default"
+                  className="w-full mt-4 text-black font-bold shadow-primary drop-shadow-sm h-12"
+                >
+                  Checkout
+                </Button>
+              </Link>
+            </DropdownMenuItem>
           </>
         )}
       </DropdownMenuContent>

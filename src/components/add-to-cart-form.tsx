@@ -45,10 +45,6 @@ export default function AddToCartForm({ product }: Props) {
 
     addToCart(product, count);
     setCount(1);
-
-    toast({
-      description: `Added ${count} ${count === 1 ? "item" : "items"} to cart`,
-    });
   };
 
   return (
