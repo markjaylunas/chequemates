@@ -45,7 +45,7 @@ export default function AddToCartForm({ product }: Props) {
       <div className="mt-4 h-12 min-w-32 flex-1 flex justify-between bg-secondary w-full items-center gap-2 rounded-lg">
         <Button
           variant="secondary"
-          className="w-8 h-8 -mb-3"
+          className="w-8 h-8 -mb-3 bg-transparent"
           disabled={count <= 1}
           onClick={() => {
             if (count <= 1) return;
@@ -57,7 +57,7 @@ export default function AddToCartForm({ product }: Props) {
         <span className="font-medium">{count}</span>
         <Button
           variant="secondary"
-          className="w-8 h-8"
+          className="w-8 h-8 bg-transparent"
           disabled={count === product.stock}
           onClick={() => {
             setCount((v) => {
