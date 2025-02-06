@@ -1,5 +1,4 @@
 import { CartType, ProductData } from "@/lib/types";
-import { useEffect, useState } from "react";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -82,17 +81,3 @@ export const useCartStore = create<CartState>()(
     }
   )
 );
-
-export const useHydratedCartStore = () => {
-  const [hydrated, setHydrated] = useState(false);
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
-
-  return {
-    hydrated,
-    ...useCartStore.getState(),
-    ...useCartStore((state) => state),
-  };
-};

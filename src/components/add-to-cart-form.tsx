@@ -2,7 +2,7 @@
 
 import { toast } from "@/hooks/use-toast";
 import { ProductData } from "@/lib/types";
-import { useHydratedCartStore } from "@/store/user-cart-store";
+import { useCartStore } from "@/store/user-cart-store";
 import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import Icon from "./icons";
@@ -14,11 +14,7 @@ type Props = {
 
 export default function AddToCartForm({ product }: Props) {
   const [count, setCount] = useState(1);
-  const { hydrated, addToCart, cart } = useHydratedCartStore();
-
-  if (!hydrated) {
-    return null;
-  }
+  const { addToCart, cart } = useCartStore();
 
   const handleAddToCart = () => {
     const existingItem = cart.find(
