@@ -16,13 +16,11 @@ export default function AddToCartForm({ product }: Props) {
   const [count, setCount] = useState(1);
   const { hydrated, addToCart, cart } = useHydratedCartStore();
 
-  // Don't render until client-side hydration is complete
   if (!hydrated) {
     return null;
   }
 
   const handleAddToCart = () => {
-    // Find existing item safely
     const existingItem = cart.find(
       (item) => item.product && item.product.id === product.id
     );
@@ -35,7 +33,6 @@ export default function AddToCartForm({ product }: Props) {
       return;
     }
 
-    // Ensure product is valid before adding
     if (!product || !product.id) {
       toast({
         description: "Invalid product data",

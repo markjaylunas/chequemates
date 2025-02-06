@@ -1,6 +1,5 @@
 import React, { JSX } from "react";
 
-// Define the types for all supported icons
 type IconName =
   | "cart"
   | "close"
@@ -13,10 +12,9 @@ type IconName =
 
 interface IconProps {
   icon: IconName;
-  className?: string; // Optional class for styling
+  className?: string;
 }
 
-// Inline SVGs for the supported icons
 const icons: Record<IconName, JSX.Element> = {
   cart: (
     <svg width="22" height="20" xmlns="http://www.w3.org/2000/svg">

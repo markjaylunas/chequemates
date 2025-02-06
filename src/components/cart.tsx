@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useCartStore } from "@/store/user-cart-store"; // Zustand cart store
+import { useCartStore } from "@/store/user-cart-store";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { CartItem } from "./cart-item";
