@@ -4,8 +4,14 @@ import { ProductData } from "@/lib/types";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import {
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+} from "./ui/carousel";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 
 type Props = {
@@ -15,7 +21,7 @@ type Props = {
 
 export function ImageShowcase({ name, images }: Props) {
   const [selectedImage, setSelectedImage] = useState(images[0]);
-
+  const [api, setApi] = useState<CarouselApi>();
   const handleChangeImage = (image: ProductData["images"][0]) => {
     setSelectedImage(image);
   };
@@ -31,18 +37,44 @@ export function ImageShowcase({ name, images }: Props) {
     setSelectedImage(images[nextIndex]);
   };
 
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setSelectedImage(images[api.selectedScrollSnap()]);
+
+    api.on("select", () => {
+      setSelectedImage(images[api.selectedScrollSnap()]);
+    });
+  }, [api]);
+
   return (
     <section className="w-full max-w-96">
       <Dialog>
         <DialogTrigger>
-          <Image
-            src={selectedImage.image}
-            alt={name}
-            width={900}
-            height={900}
-            className="rounded-xl"
-            unoptimized
-          />
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+          >
+            <CarouselContent>
+              {images.map((image) => (
+                <CarouselItem key={image.id}>
+                  <Image
+                    src={selectedImage.image}
+                    alt={name}
+                    width={900}
+                    height={900}
+                    className="rounded-xl"
+                    unoptimized
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </DialogTrigger>
         <DialogContent className="bg-transparent border-none shadow-none">
           <DialogTitle className="sr-only">{name}</DialogTitle>
@@ -51,7 +83,7 @@ export function ImageShowcase({ name, images }: Props) {
               <Button
                 variant="secondary"
                 size="icon"
-                className="rounded-full absolute top-1/2 -left-5 "
+                className="rounded-full absolute top-1/2 -left-5 z-10"
                 onClick={() => handlePrevious(selectedImage.id)}
               >
                 <ChevronLeft size={32} strokeWidth={4} />
@@ -59,19 +91,33 @@ export function ImageShowcase({ name, images }: Props) {
               <Button
                 variant="secondary"
                 size="icon"
-                className="absolute rounded-full top-1/2 -right-5"
+                className="absolute rounded-full top-1/2 -right-5 z-10"
                 onClick={() => handleNext(selectedImage.id)}
               >
                 <ChevronRight size={32} strokeWidth={4} />
               </Button>
-              <Image
-                src={selectedImage.image}
-                alt={name}
-                width={900}
-                height={900}
-                className="rounded-xl"
-                unoptimized
-              />
+              <Carousel
+                setApi={setApi}
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+              >
+                <CarouselContent>
+                  {images.map((image) => (
+                    <CarouselItem key={image.id}>
+                      <Image
+                        src={selectedImage.image}
+                        alt={name}
+                        width={900}
+                        height={900}
+                        className="rounded-xl"
+                        unoptimized
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
             </div>
             <OtherImages
               currentImage={selectedImage}
