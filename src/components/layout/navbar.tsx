@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
@@ -48,13 +48,7 @@ export function Navbar() {
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end gap-3">
           <Button variant="ghost" size="icon" className="rounded-full">
-            <Image
-              src={"/images/icon-cart.svg"}
-              alt="cart"
-              width={18}
-              height={18}
-              unoptimized
-            />
+            <ShoppingCart />
           </Button>
           <Avatar>
             <AvatarImage src="/images/image-avatar.png" />
