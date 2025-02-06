@@ -19,7 +19,7 @@ export default function AddToCartForm({ productId, stock }: Props) {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row gap-2">
+    <div className="flex flex-col sm:flex-row gap-4">
       <div className="mt-4 h-12 min-w-32 flex-1 flex justify-between bg-secondary w-full items-center gap-2 rounded-lg">
         <Button
           variant="secondary"
