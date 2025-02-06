@@ -11,30 +11,43 @@ export function ImageShowcase({
   name: string;
   images: ProductData["images"];
 }) {
-  const [image, setImage] = useState(images[0]);
+  const [selectedImage, setSelectedImage] = useState(images[0]);
+
+  const handleChangeImage = (image: ProductData["images"][0]) => {
+    setSelectedImage(image);
+  };
 
   return (
-    <div>
+    <section className="max-w-sm">
       <Image
-        src={image.image}
+        src={selectedImage.image}
         alt={name}
-        width={200}
-        height={200}
+        width={900}
+        height={900}
+        className="rounded-xl"
         unoptimized
       />
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 mt-6">
         {images.map((image) => (
-          <div className="relative" key={image.thumbnail}>
+          <button
+            onClick={() => handleChangeImage(image)}
+            className="relative"
+            key={image.thumbnail}
+          >
+            {image.id === selectedImage.id && (
+              <div className="w-full h-full bg-white/60 absolute top-0" />
+            )}
             <Image
               src={image.thumbnail}
               alt={name}
               width={200}
               height={200}
               unoptimized
+              className="rounded-xl"
             />
-          </div>
+          </button>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

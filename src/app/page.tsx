@@ -18,27 +18,35 @@ export default function Home() {
     stock: 10,
     images: [
       {
+        id: "image-1",
         image: "/images/image-product-1.jpg",
         thumbnail: "/images/image-product-1-thumbnail.jpg",
       },
       {
+        id: "image-2",
         image: "/images/image-product-2.jpg",
         thumbnail: "/images/image-product-2-thumbnail.jpg",
       },
       {
+        id: "image-3",
         image: "/images/image-product-3.jpg",
         thumbnail: "/images/image-product-3-thumbnail.jpg",
       },
       {
+        id: "image-4",
         image: "/images/image-product-4.jpg",
         thumbnail: "/images/image-product-4-thumbnail.jpg",
       },
     ],
   };
   return (
-    <main className="min-h-screen container mx-auto flex ">
-      <ImageShowcase name={product.name} images={product.images} />
-      <ProductInfo product={product} />
+    <main className="min-h-screen container  mx-auto">
+      <section className="flex justify-center mt-20 gap-24 w-full">
+        <ImageShowcase name={product.name} images={product.images} />
+        <div className="mt-10">
+          <ProductInfo product={product} />
+        </div>
+      </section>
     </main>
   );
 }

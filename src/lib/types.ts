@@ -9,5 +9,5 @@ export type ProductData = {
   discount: number;
   stock: number;
 
-  images: { image: string; thumbnail: string }[];
+  images: { id: string; image: string; thumbnail: string }[];
 };
