@@ -15,7 +15,7 @@ export default function ProductInfo({ product }: { product: ProductData }) {
         </h4>
         <CardTitle className="text-4xl font-bold">{name}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-4">
         <p className="text-muted-foreground mb-4">{description}</p>
         <div className="space-y-2">
           <div className="flex items-center space-x-2">

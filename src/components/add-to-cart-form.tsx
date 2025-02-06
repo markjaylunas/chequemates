@@ -1,5 +1,6 @@
 "use client";
 
+import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import Icon from "./icons";
 import { Button } from "./ui/button";
@@ -18,8 +19,8 @@ export default function AddToCartForm({ productId, stock }: Props) {
   };
 
   return (
-    <>
-      <div className="mt-4 flex justify-between bg-secondary w-36 items-center gap-2">
+    <div className="flex gap-2">
+      <div className="mt-4 flex justify-between bg-secondary w-56 items-center gap-2 rounded-lg">
         <Button
           variant="secondary"
           className="w-8 h-8 -mb-3"
@@ -48,12 +49,14 @@ export default function AddToCartForm({ productId, stock }: Props) {
         </Button>
       </div>
       <Button
+        size="lg"
         variant="default"
-        className="w-full mt-4"
+        className="w-full mt-4 text-black font-bold"
         onClick={handleAddToCart}
       >
-        Add to Cart
+        <ShoppingCart />
+        Add to cart
       </Button>
-    </>
+    </div>
   );
 }
