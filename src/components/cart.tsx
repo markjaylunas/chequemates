@@ -1,4 +1,5 @@
-import { product } from "@/app/page";
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,96 +7,59 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CartItemType, CartType } from "@/lib/types";
+import { useCartStore } from "@/store/user-cart-store"; // Zustand cart store
 import { ShoppingCart } from "lucide-react";
-import Image from "next/image";
-import Icon from "./icons";
+import { CartItem } from "./cart-item";
 import { Button } from "./ui/button";
 
 export default function Cart() {
-  const cart: CartType = [
-    {
-      product: product,
-      quantity: 1,
-    },
-  ];
+  const { cart, removeFromCart, totalQuantity } = useCartStore();
 
   const handleRemove = (id: string) => {
-    console.log("remove", id);
+    removeFromCart(id);
   };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <ShoppingCart />
+        {/* Add cart item count */}
+        <div className="relative">
+          <ShoppingCart />
+          {totalQuantity() > 0 && (
+            <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+              {totalQuantity()}
+            </span>
+          )}
+        </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className=" sm:min-w-56 p-4">
+
+      <DropdownMenuContent align="end" className="sm:min-w-56 p-4">
         <DropdownMenuLabel>Cart</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {cart.map((item) => (
-          <div key={item.product.id}>
-            <CartItem
-              cartItem={item}
-              onRemove={() => handleRemove(item.product.id)}
-            />
-          </div>
-        ))}
-        <div>
-          <Button
-            size="lg"
-            variant="default"
-            className="w-full mt-4 text-black font-bold shadow-primary drop-shadow-sm h-12"
-          >
-            Checkout
-          </Button>
-        </div>
+
+        {cart.length === 0 ? (
+          <p className="text-muted-foreground text-sm">Your cart is empty.</p>
+        ) : (
+          <>
+            {cart.map((item) => (
+              <div key={item.product.id}>
+                <CartItem
+                  cartItem={item}
+                  onRemove={() => handleRemove(item.product.id)}
+                />
+              </div>
+            ))}
+
+            <Button
+              size="lg"
+              variant="default"
+              className="w-full mt-4 text-black font-bold shadow-primary drop-shadow-sm h-12"
+            >
+              Checkout
+            </Button>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
-  );
-}
-
-type CartItemProps = {
-  cartItem: CartItemType;
-  onRemove: () => void;
-};
-
-export function CartItem({ cartItem, onRemove }: CartItemProps) {
-  const { product, quantity } = cartItem;
-  return (
-    <div className="flex gap-2 items-center justify-between ">
-      {/* Product Image */}
-      <div className="w-16 h-16 flex-shrink-0">
-        <Image
-          src={product.images[0].thumbnail}
-          alt={product.name}
-          width={64}
-          height={64}
-          className="rounded-lg object-cover"
-          unoptimized
-        />
-      </div>
-
-      {/* Product Info */}
-      <div className="flex-1 ml-4">
-        <h4 className="text-sm font-semibold text-muted-foreground">
-          {product.name}
-        </h4>
-        <p className="text-sm text-muted-foreground">
-          {`$${product.price.toFixed(2)} x ${quantity}`}{" "}
-          <span className="font-bold text-black">
-            ${(product.price * quantity).toFixed(2)}
-          </span>
-        </p>
-      </div>
-
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={onRemove}
-        aria-label="Remove item"
-      >
-        <Icon icon="delete" />
-      </Button>
-    </div>
   );
 }

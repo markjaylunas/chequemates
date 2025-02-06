@@ -50,7 +50,7 @@ export default function ProductInfo({ product }: { product: ProductData }) {
         {stock === 0 ? (
           <span className="text-red-500">Out of Stock</span>
         ) : (
-          <AddToCartForm productId={product.id} stock={stock} />
+          <AddToCartForm product={product} />
         )}
       </CardContent>
     </Card>
