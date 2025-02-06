@@ -16,31 +16,31 @@ export function Navbar() {
           <nav className="flex items-center space-x-6 text-sm font-medium">
             <Link
               className="transition-colors hover:text-foreground/80 text-foreground/60"
-              href="/collections"
+              href="#"
             >
               Collections
             </Link>
             <Link
               className="transition-colors hover:text-foreground/80 text-foreground/60"
-              href="/men"
+              href="#"
             >
               Men
             </Link>
             <Link
               className="transition-colors hover:text-foreground/80 text-foreground/60"
-              href="/women"
+              href="#"
             >
               Women
             </Link>
             <Link
               className="transition-colors hover:text-foreground/80 text-foreground/60"
-              href="/about"
+              href="#"
             >
               About
             </Link>
             <Link
               className="transition-colors hover:text-foreground/80 text-foreground/60"
-              href="/contact"
+              href="#"
             >
               Contact
             </Link>
