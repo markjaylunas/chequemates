@@ -1,80 +1,67 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import * as React from "react";
-
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import { cn } from "@/lib/utils";
-
-const links: { title: string; href: string }[] = [
-  {
-    title: "Collections",
-    href: "#",
-  },
-  {
-    title: "Men",
-    href: "#",
-  },
-  {
-    title: "Women",
-    href: "#",
-  },
-  {
-    title: "About",
-    href: "#",
-  },
-  {
-    title: "Contact",
-    href: "#",
-  },
-];
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
 
 export function Navbar() {
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        {links.map((link) => (
-          <NavigationMenuItem key={link.title}>
-            <Link href={link.href} legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                {link.title}
-              </NavigationMenuLink>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center justify-between mx-auto">
+        <div className="mr-4 hidden md:flex">
+          <Link className="mr-10 flex items-center space-x-2" href="/">
+            <span className="font-black text-xl">chequemates</span>
+          </Link>
+          <nav className="flex items-center space-x-6 text-sm font-medium">
+            <Link
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              href="/collections"
+            >
+              Collections
             </Link>
-          </NavigationMenuItem>
-        ))}
-      </NavigationMenuList>
-    </NavigationMenu>
+            <Link
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              href="/men"
+            >
+              Men
+            </Link>
+            <Link
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              href="/women"
+            >
+              Women
+            </Link>
+            <Link
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              href="/about"
+            >
+              About
+            </Link>
+            <Link
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              href="/contact"
+            >
+              Contact
+            </Link>
+          </nav>
+        </div>
+        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end gap-3">
+          <Button variant="ghost" size="icon" className="rounded-full">
+            <Image
+              src={"/images/icon-cart.svg"}
+              alt="cart"
+              width={18}
+              height={18}
+              unoptimized
+            />
+          </Button>
+          <Avatar>
+            <AvatarImage src="/images/image-avatar.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </div>
+      </div>
+    </header>
   );
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";
